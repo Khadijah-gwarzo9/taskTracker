@@ -1,0 +1,673 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Garamond', Times New Roman, Georgia, Times New Roman, Times;
+    background-color: #080c34;
+    margin: 20px;
+}
+
+.container {
+    max-width: 700px;
+    height: auto;
+    margin: auto;
+    background-color: #eaedf0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.heading{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: -10px;
+}
+.taskBox {
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    text-align: center;
+    color: #333;
+    font-size: 30px;
+    font-weight: 900;
+    margin-top: 50px;
+}
+.text h2{
+    margin-bottom: 40px;
+    font-size: 25px;
+    font-weight: 400;
+}
+.taskBox label {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: #1a1430;
+    text-align: center;
+    /* font-style: italic; */
+
+}
+
+#taskInput::placeholder,
+#timeInput::placeholder {
+    color: #999;
+    /* font-style: italic; */
+
+}
+
+#taskInput,
+#timeInput {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background-color: transparent;
+}
+
+#taskInput:focus,
+#timeInput:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.btn {
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn button {
+    padding: 6px 25px;
+    border: none;
+    margin-top: 10px;
+    background-color: #818ae7;
+    color: #101720;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 23px;
+}
+
+.btn #submitTaskBtn {
+    padding: 8px 50px;
+    border: none;
+    margin-top: 10px;
+    background-color: #818ae7;
+    color: #101720;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 28px;
+}
+
+.btn button:hover,
+.btn #submitTaskBtn:hover {
+    background-color: #0d1352;
+    color: #e7f6ff;
+}
+
+.row {
+    margin: 0 -5px;
+    background: #e3edf8;
+    overflow: hidden;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column {
+    float: left;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.card {
+    box-shadow: 3px 3px 8px 3px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+    margin-top: 10px;
+    background: #eaedf0;
+}
+
+.taskList {
+    overflow-x: auto;
+}
+
+.taskList ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.taskList li {
+    display: flex;
+    color: #333;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.popup {
+    width: 600px;
+    background-color: #eaedf0;
+    box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
+    border-radius: 6px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #beaeae;
+    /* overflow-y: scroll; */
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+}
+.open-popup{
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%,-50%) scale(1);
+}
+.popup h2 {
+    font-weight: 700;
+    color: #1a1430;
+    font-size: 30px;
+}
+
+.close2 {
+    color: #000;
+    float: right;
+    font-size: 28px;
+    margin-top: 8px;
+}
+
+.close2:hover,
+.close2:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.actions button {
+    padding: 6px 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.actions button:hover {
+    background-color: #034081;
+}
+
+.actions .deleteBtn {
+    background-color: #ee1818;
+    color: #e7f6ff;
+}
+
+.actions .deleteBtn:hover {
+    background-color: #bd1111;
+}
+
+.actions .viewBtn {
+    background-color: #138c48;
+    color: #e7f6ff;
+}
+
+.actions .viewBtn:hover {
+    background-color: #06482c;
+}
+
+#addNewTask {
+    padding: 5px 9px;
+    border: none;
+    background-color: #12c075;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    position: absolute;
+    margin-bottom: 30px;
+    /* margin-top: 5px; */
+    left: 10px;
+    transform: translateY(-88%);
+}
+
+#addNewTask i {
+    margin: 0 3px 0;
+}
+
+#addNewTask:hover {
+    background-color: #0a6e42;
+}
+
+.checkbox-container {
+    display: inline-block;
+    position: relative;
+    padding-left: 3px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+}
+
+.custom-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 9px;
+    top: 5px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.custom-checkbox:checked ~ .checkmark {
+    background-color: #2196f3;
+    box-shadow: 0 3px 7px rgba(33, 150, 243, 0.3);
+}
+
+.custom-checkbox:checked ~ .checkmark:after {
+    display: block;
+}
+
+@keyframes checkAnim {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 10px;
+    }
+}
+
+.custom-checkbox:checked ~ .checkmark:after {
+    animation: checkAnim 0.2s forwards;
+}
+/* view popup */
+
+.popup2 {
+    width: 500px;
+    background-color: #eaedf0;
+    box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #625c75;
+    visibility: hidden;
+    overflow: auto;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.open-view {
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup2 h2 {
+    font-weight: 700;
+    color: #1a1430;
+    font-size: 30px;
+}
+
+.popup2 p {
+    margin: 10px 0;
+    margin-right: 40px;
+    justify-content: space-between;
+}
+
+.close3 {
+    color: #000;
+    float: right;
+    font-size: 28px;
+    margin-top: 8px;
+}
+
+.close3:hover,
+.close3:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #f1f5f8;
+    margin: 12% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    height: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    position: relative;
+    justify-content: center;
+}
+
+.close {
+    color: #aaaaaa;
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 30px;
+    margin-top: -20px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    margin-top: -18px;
+    font-weight: 600;
+    text-align: center;
+    color: #1a1430;
+}
+
+input[type="text"],
+input[type="datetime-local"],
+textarea {
+    width: 80%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
+    background-color: transparent;
+}
+
+input[type="text"]:focus,
+input[type="datetime-local"]:focus,
+textarea :focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+input[type="text"] {
+    margin-bottom: 15px;
+}
+
+h4 {
+    font-weight: 700;
+    color: #1a1430;
+    text-align: center;
+}
+
+textarea {
+    margin-bottom: 15px;
+}
+
+button#updateBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 10px;
+    border: none;
+    width: 70%;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+button#updateBtn:hover {
+    background-color: #034081;
+}
+
+.addNotes {
+    margin-top: 20px;
+    resize: vertical;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+        width: auto;
+    }
+    .heading{
+        text-align: center;
+        flex-direction: row;
+    }
+    .taskBox {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .taskBox label {
+        margin-left: 0;
+        margin-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    #taskInput,
+    #timeInput {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+    .row {
+        display: block;
+    }
+
+    .column {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .popup {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .popup2 {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+
+    input[type="text"],
+    input[type="time"],
+    textarea {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .container {
+        margin: 10px;
+        width: auto;
+    }
+
+    .taskBox {
+        padding: 10px;
+    }
+
+    .text {
+        font-size: 30px;
+        /* margin-left: 0;
+        margin-bottom: 5px; */
+    }
+
+    .taskBox label {
+        margin-bottom: 5px;
+        margin-top: 5px;
+        text-align: left;
+    }
+
+    #taskInput,
+    #timeInput {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .btn {
+        margin-top: 10px;
+        justify-content: flex-end;
+    }
+
+    .row {
+        display: block;
+    }
+
+    .column {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .popup {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .popup2 {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .modal-content {
+        width: 80%;
+    }
+
+    input[type="text"],
+    input[type="datetime-local"],
+    textarea {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 300px){
+    .container {
+        margin: 10px;
+        width: auto;
+    }
+
+    .taskBox {
+        padding: 10px;
+    }
+
+    .text {
+        font-size: 30px;
+        /* margin-left: 0;
+        margin-bottom: 5px; */
+    }
+
+    .taskBox label {
+        margin-bottom: 5px;
+        margin-top: 5px;
+        text-align: left;
+    }
+
+    #taskInput,
+    #timeInput {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .btn {
+        margin-top: 10px;
+        /* justify-content: center; */
+        padding: 5px 8px;
+    }
+
+    .row {
+        display: block;
+    }
+
+    .column {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .popup {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .popup2 {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .modal-content {
+        width: 80%;
+    }
+
+    input[type="text"],
+    input[type="datetime-local"],
+    textarea {
+        width: 100%;
+    }
+}
